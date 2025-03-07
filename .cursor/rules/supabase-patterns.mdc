@@ -1,0 +1,6 @@
+---
+description: Standard patterns for Supabase integration
+globs: 
+alwaysApply: false
+---
+Use environment variables for Supabase credentials, implement proper authentication flows, create service functions for database operations, handle offline scenarios when possible

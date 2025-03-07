@@ -1,71 +1,3 @@
-# Electrician Business App
-
-A modern web application for electricians to manage customers, jobs, estimates, and invoices. Built with Next.js, TypeScript, and Supabase.
-
-## Features
-
-- **Customer Management**: Store and manage customer information including contact details and service history
-- **Job Tracking**: Create and track jobs with detailed line items
-- **Estimates & Invoices**: Generate professional estimates and convert them to invoices
-- **Mobile-Friendly**: Designed for use in the field on mobile devices
-
-## Tech Stack
-
-- **Frontend**: Next.js with TypeScript and Tailwind CSS
-- **Backend**: Supabase (PostgreSQL database with built-in APIs)
-- **Authentication**: Supabase Auth
-- **Hosting**: Vercel (recommended)
-
-## Project Structure
-
-```
-src/
-├── app/                  # Next.js App Router pages
-├── components/           # Reusable UI components
-├── lib/                  # Utility functions and configuration
-├── services/             # Data services for API interactions
-└── types/                # TypeScript type definitions
-```
-
-## Database Schema
-
-The application uses the following database tables:
-
-- **customers**: Store customer information (name, contact details, address)
-- **jobs**: Track jobs associated with customers
-- **job_items**: Store line items for each job
-- **estimates**: Generate and track estimates for jobs
-- **invoices**: Create and manage invoices for completed jobs
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or newer)
-- npm or yarn
-- Supabase account
-
-### Setup
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a Supabase project at https://supabase.com
-4. Set up the database schema (SQL scripts provided below)
-5. Copy `.env.example` to `.env.local` and add your Supabase credentials
-6. Run the development server:
-   ```bash
-   npm run dev
-   ```
-7. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Database Setup
-
-Run the following SQL in your Supabase SQL Editor to create the necessary tables:
-
-```sql
 -- Create customers table
 CREATE TABLE customers (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -149,17 +81,17 @@ CREATE INDEX idx_jobs_customer_id ON jobs(customer_id);
 CREATE INDEX idx_job_items_job_id ON job_items(job_id);
 CREATE INDEX idx_estimates_job_id ON estimates(job_id);
 CREATE INDEX idx_invoices_job_id ON invoices(job_id);
-```
 
-## Deployment
+-- Set up Row Level Security (RLS) policies
+ALTER TABLE customers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE jobs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE job_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE estimates ENABLE ROW LEVEL SECURITY;
+ALTER TABLE invoices ENABLE ROW LEVEL SECURITY;
 
-The application can be easily deployed to Vercel:
-
-1. Push your code to a Git repository (GitHub, GitLab, etc.)
-2. Import the project in Vercel
-3. Add your environment variables
-4. Deploy
-
-## License
-
-MIT
+-- Create policies for authenticated users
+CREATE POLICY "Allow full access to authenticated users" ON customers FOR ALL TO authenticated USING (true);
+CREATE POLICY "Allow full access to authenticated users" ON jobs FOR ALL TO authenticated USING (true);
+CREATE POLICY "Allow full access to authenticated users" ON job_items FOR ALL TO authenticated USING (true);
+CREATE POLICY "Allow full access to authenticated users" ON estimates FOR ALL TO authenticated USING (true);
+CREATE POLICY "Allow full access to authenticated users" ON invoices FOR ALL TO authenticated USING (true); 

@@ -1,0 +1,9 @@
+---
+description: Follow TypeScript best practices including strong typing
+globs: 
+alwaysApply: false
+---
+
+# Your rule content
+
+Use TypeScript interfaces for data models, avoid 'any' type, implement error handling for API calls, document functions with JSDoc style comments

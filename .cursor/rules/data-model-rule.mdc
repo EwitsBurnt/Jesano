@@ -1,0 +1,6 @@
+---
+description: Database structure for electrical business
+globs: 
+alwaysApply: false
+---
+Implement clear relationships between customers, jobs, job lines, estimates, and invoices. Use Supabase's relational features for foreign keys. Include standard fields for electrical work documentation.

@@ -1,0 +1,6 @@
+---
+description: Organization for electrician business app
+globs: 
+alwaysApply: false
+---
+Separate client/job management, inventory tracking, and invoicing into distinct modules, create reusable components for forms and data display, implement responsive design for field use
